@@ -1,8 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_const_constructors
-
+import 'package:bmi_calculator/widget/icon_content.dart';
+import 'package:bmi_calculator/widget/reusable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+
 import 'package:velocity_x/velocity_x.dart';
+
+const inactivecolor = Color(0xFF111328);
+const activecolor = Color(0xFF1D1E33);
+
+enum Gender {
+  male,
+  female;
+}
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -12,55 +22,61 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedgender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('BMI CALCULATOR'),
+          title: Text('BMI CALCULATOR').centered(),
         ),
         body: Column(
           children: [
             Row(
               children: [
-                boxForapp(
-                  color: Color(0xFF1D1E33),
+                GestureDetector(
+                  onTap: () {
+                    selectedgender = Gender.male;
+                    setState(() {});
+                  },
+                  child: BoxForapp(
+                    color: selectedgender == Gender.male
+                        ? activecolor
+                        : inactivecolor,
+                    cardchild: Iconcontent(icon: Icons.male, name: "MALE"),
+                  ),
                 ).expand(),
-                boxForapp(
-                  color: Color(0xFF1D1E33),
+                GestureDetector(
+                  onTap: () {
+                    selectedgender = Gender.female;
+                    setState(() {});
+                  },
+                  child: BoxForapp(
+                    color: selectedgender == Gender.female ? activecolor : inactivecolor,
+                    cardchild: Iconcontent(
+                      icon: Icons.female,
+                      name: "FEMALE",
+                    ),
+                  ),
                 ).expand(),
               ],
             ).expand(),
-            boxForapp(
+            BoxForapp(
               color: Color(0xFF1D1E33),
+              cardchild: Text(""),
             ).expand(),
             Row(
               children: [
-                boxForapp(
+                BoxForapp(
                   color: Color(0xFF1D1E33),
+                  cardchild: Text(""),
                 ).expand(),
-                boxForapp(
+                BoxForapp(
                   color: Color(0xFF1D1E33),
+                  cardchild: Text(""),
                 ).expand(),
               ],
             ).expand(),
           ],
         ));
-  }
-}
-
-class boxForapp extends StatelessWidget {
-  final Color color;
-  const boxForapp({
-    Key? key,
-    required this.color,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-          color: Color(0xFF1D1E33), borderRadius: BorderRadius.circular(10)),
-    );
   }
 }
