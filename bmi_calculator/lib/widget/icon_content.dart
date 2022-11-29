@@ -1,7 +1,6 @@
+import 'package:bmi_calculator/constraints/constraint.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-
 
 class Iconcontent extends StatelessWidget {
   final IconData icon;
@@ -24,7 +23,7 @@ class Iconcontent extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        name.text.bold.xl2.make()
+        name.text.bold.textStyle(klabeltext).make()
       ],
     );
   }
